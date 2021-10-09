@@ -1,0 +1,27 @@
+<html>
+<meta charset="UTF-8">
+<head>
+<title>
+    Audio Peeler API Testing
+</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    function send_data() {
+        new_freq = $('#in').val() //value I want to send
+        $.ajax({ 
+            url: 'http://127.0.0.1:5000', 
+            type: 'POST', 
+            data: new_freq,
+            success: function(response){ 
+                $('#response').text(response)
+            } 
+        })
+    }
+</script>
+</head>
+<body>
+    <input id="in" type="file">
+    <button onclick="send_data()">Send It</button>
+    <div id="response"></div>
+</body>
+</html>
