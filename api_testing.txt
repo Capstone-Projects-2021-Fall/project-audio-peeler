@@ -1,0 +1,22 @@
+The API will be used for the following:
+    - accept a file uploaded by the client
+    - send the file through DEMUCS to receive component audio files
+    - send the client back the component audio files
+
+The file upload will accept:
+    - individual
+    - audio type
+
+Multiple file uploads should result in an error on the client's side, error tells client that only one file may be uploaded at a time
+Audio Type will result in an error on the client's side; communicates with client that audio files are the only file type accepted (for now)
+
+The file being sent through DEMUCS:
+    - DEMUCS must be online and available
+
+If DEMUCS is not online and available to receive and process the files then the API will print out to the client that the server is not responding
+
+Sending the client back the component audio files:
+    - Client must have enough RAM to temporarily store the audio files on their machine
+
+If the client does not have enough memory to hold the audio files the client will receive an error stating that there is not enough room on the machine.
+This message may have to be given before the files are sent back to the client in order for them to receive the error message.
