@@ -5,18 +5,26 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <div>
+          <h4>
+            Welcome to
+          </h4>
+          <h2>
+            AudioPeeler!
+          </h2>
+        </div>
+        
+        <button>
+          Browse
+        </button>
+        <div>
+          music.mp3
+          (the are will play audio file later)
+        </div>
+        
+        <div class="output_area">
+          All the output will be here...
+        </div>
       </header>
     </div>
   );
