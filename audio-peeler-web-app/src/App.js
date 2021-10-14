@@ -1,16 +1,34 @@
 import logo from './logo.svg';
 import React, { Component } from 'react';
 import './App.css';
+import axios from 'axios';
 class App extends Component {
 
   state = { selectedFile: null }
 
-  fileChangedHandler = (event) => {
-    const file = event.target.files[0];
+  fileSelectedHandler = (event) => {
+    this.setState({
+      selectedfile : event.target.files[0]
+    })
+    
   }
 
   uploadHandler = () => {
-    console.log(this.state.selectedFile)
+    
+    const formData = new FormData()
+    formData.append(
+      'myFile',
+      this.state.selectedFile,
+      //this.state.selectedFile.name
+    )
+    axios.post('http://172.105.151.238:5000/test', formData, {
+      onUploadProgress: ProgressEvent => {
+        console.log(ProgressEvent.loaded / ProgressEvent.total)
+      }
+    })
+    .then(res => {
+      console.log(res)
+    })
   }
   render() {
     return (
@@ -24,10 +42,10 @@ class App extends Component {
               AudioPeeler!
             </h2>
           </div>
-          <input type="file" onChange={this.fileChangedHandler} />
-          <br/>
-          
-          
+          <input type="file" onChange={this.fileSelectedHandler} />
+          <br />
+
+
           <button onClick={this.uploadHandler}>
             Submit
           </button>
