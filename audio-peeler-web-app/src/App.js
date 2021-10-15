@@ -17,6 +17,10 @@ import axios from 'axios';
 
 
     function uploadHandler(){
+      var file = document.getElementById('file').files[0];
+      var url = URL.createObjectURL(file);
+      console.log(url);
+      document.getElementById("audio_id").src = url;
 
       const formData = new FormData()
       formData.append(
@@ -46,7 +50,7 @@ import axios from 'axios';
               </h2>
             </div>
 
-            <input title={"sup"} type="file" onChange={changeHandler} className={"file_button"}/>
+            <input title={"sup"} type="file" id="file" onChange={changeHandler} className={"file_button"}/>
             <br/>
 
             {isFilePicked ? (<p className={"text"}> {selectedFile.name} </p>) : (<p className={"text"}> Nothing to see here </p>)}
@@ -54,6 +58,12 @@ import axios from 'axios';
             <button className={"button"} onClick={uploadHandler}>
               Submit
             </button>
+
+            <div>
+            <audio id="audio_id" controls autoPlay loop>
+            music.mp3
+            </audio>
+          </div>
 
 
             <div class="output_area">
