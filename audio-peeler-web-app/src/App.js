@@ -66,11 +66,7 @@ class App extends Component {
       </div>
 =======
 
-
-
-
-
-  function App() {
+function App() {
     const [selectedFile, setSelectedFile] = useState();
     const [isFilePicked, setIsFilePicked] = useState(false);
 
@@ -81,11 +77,15 @@ class App extends Component {
 
 
     function uploadHandler(){
+      var file = document.getElementById('file').files[0];
+      var url = URL.createObjectURL(file);
+      console.log(url);
+      document.getElementById("audio_id").src = url;
 
       const formData = new FormData()
       formData.append(
           'myFile',
-          this.state.selectedFile,
+          selectedFile,
           //this.state.selectedFile.name
       )
       axios.post('http://172.105.151.238:5000/test', formData, {
@@ -110,7 +110,7 @@ class App extends Component {
               </h2>
             </div>
 
-            <input title={"sup"} type="file" onChange={changeHandler} className={"file_button"}/>
+            <input title={"sup"} type="file" id="file" onChange={changeHandler} className={"file_button"}/>
             <br/>
 
             {isFilePicked ? (<p className={"text"}> {selectedFile.name} </p>) : (<p className={"text"}> Nothing to see here </p>)}
@@ -118,6 +118,12 @@ class App extends Component {
             <button className={"button"} onClick={uploadHandler}>
               Submit
             </button>
+
+            <div>
+            <audio id="audio_id" controls autoPlay loop>
+            music.mp3
+            </audio>
+          </div>
 
 
             <div class="output_area">
@@ -127,7 +133,6 @@ class App extends Component {
         </div>
  main
     );
-
-}
+  }
 
 export default App;
