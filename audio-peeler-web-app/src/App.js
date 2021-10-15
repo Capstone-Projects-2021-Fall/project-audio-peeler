@@ -14,6 +14,10 @@ class App extends Component {
   }
 
   uploadHandler = () => {
+    var file = document.getElementById('file').files[0];
+    var url = URL.createObjectURL(file);
+    console.log(url);
+    document.getElementById("audio_id").src = url;
     
     const formData = new FormData()
     formData.append(
@@ -42,16 +46,18 @@ class App extends Component {
               AudioPeeler!
             </h2>
           </div>
-          <input type="file" onChange={this.fileSelectedHandler} />
+          <input type="file" id="file" onChange={this.fileSelectedHandler} />
           <br />
 
 
           <button onClick={this.uploadHandler}>
             Submit
           </button>
+
           <div>
+            <audio id="audio_id" controls autoPlay loop>
             music.mp3
-            (the are will play audio file later)
+            </audio>
           </div>
 
           <div class="output_area">
