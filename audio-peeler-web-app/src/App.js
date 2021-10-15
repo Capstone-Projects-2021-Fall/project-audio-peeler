@@ -21,7 +21,7 @@ function App() {
       const formData = new FormData()
       formData.append(
           'myFile',
-          this.state.selectedFile,
+          selectedFile,
           //this.state.selectedFile.name
       )
       axios.post('http://172.105.151.238:5000/test', formData, {
