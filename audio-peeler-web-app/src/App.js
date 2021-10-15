@@ -1,12 +1,9 @@
-import React, { useState } from 'react';
+import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
 
-
-
-
-
-  function App() {
+function App() {
     const [selectedFile, setSelectedFile] = useState();
     const [isFilePicked, setIsFilePicked] = useState(false);
 
@@ -72,7 +69,6 @@ import axios from 'axios';
           </header>
         </div>
     );
-
-}
+  }
 
 export default App;
