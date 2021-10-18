@@ -1,0 +1,62 @@
+.App {
+  text-align: center;
+
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+
+.output_area{
+  background-color: #9ed6e7;
+  margin-top: 10%;
+  width:100%;
+  flex-grow: 1;
+}
+
+.file_button::file-selector-button{
+  background-color: #9ed6e7;
+  color: #fffaf0;
+  border-radius: 28px;
+  font-size: 300%;
+  padding: .2em .4em;
+}
+
+.file_button::-webkit-file-upload-button{
+  background-color: #9ed6e7;
+  color: #fffaf0;
+  border-radius: 28px;
+  font-size: 300%;
+  padding: .2em .4em;
+  margin-left: 11%;
+}
+
+
+.button{
+  background-color: #9ed6e7;
+  color: #fffaf0;
+  border-radius: 28px;
+  font-size: 100%;
+  padding: .2em .4em;
+  align-content: center;
+}
+
+.text{
+  color: #fffaf0;
+}
+
+input[type='file'] {
+  color: rgba(0, 0, 0, 0)
+}
