@@ -1,5 +1,5 @@
 .App {
-  background-color: #282c34;
+  text-align: center;
 }
 
 .App-header {
@@ -44,7 +44,6 @@
 
 
 .button{
-
   background-color: #9ed6e7;
   color: #fffaf0;
   border-radius: 28px;
