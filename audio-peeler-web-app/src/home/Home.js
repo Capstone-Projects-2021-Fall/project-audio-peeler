@@ -21,19 +21,28 @@ function Home(){
 
         const formData = new FormData()
         formData.append(
-            'myFile',
+            'file',
             selectedFile,
             //this.state.selectedFile.name
         )
-        axios.post('http://172.105.151.238:5000/test', formData, {
-            onUploadProgress: ProgressEvent => {
-                console.log(ProgressEvent.loaded / ProgressEvent.total)
-            }
-        })
-            .then(res => {
-                console.log(res)
-            })
+        axios({
+            method: "post",
+            url: "http://172.105.151.238:5000/",
+            data: formData,
+            headers: { "Content-Type": "multipart/form-data" },
+          })
+          .then(function (response) {
+            let urlHTML = '<a href=' + response.data + '>' + response.data + '</a>';
+            document.getElementById("output").innerHTML += urlHTML + '<br>';
+            
+          })
+          .catch(function (response) {
+              //handle error
+              console.log(response);
+          });
     }
+
+
 
     return (
         <div >
@@ -57,14 +66,13 @@ function Home(){
                 </button>
 
                 <div>
-                    <audio id="audio_id" controls autoPlay loop>
+                    <audio id="audio_id" controls>
                         music.mp3
                     </audio>
                 </div>
 
 
-                <div class="output_area">
-                    All the output will be here...
+                <div id="output" class="output_area">
                 </div>
             </header>
         </div>
