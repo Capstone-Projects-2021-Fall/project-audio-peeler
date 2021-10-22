@@ -14,59 +14,49 @@ function Home(){
 
 
     function uploadHandler(){
-        var file = document.getElementById('file').files[0];
+        var file = document.getElementById('browse-button').files[0];
         var url = URL.createObjectURL(file);
         console.log(url);
         document.getElementById("audio_id").src = url;
 
         const formData = new FormData()
         formData.append(
-            'myFile',
+            'file',
             selectedFile,
             //this.state.selectedFile.name
         )
-        axios.post('http://172.105.151.238:5000/test', formData, {
-            onUploadProgress: ProgressEvent => {
-                console.log(ProgressEvent.loaded / ProgressEvent.total)
-            }
-        })
-            .then(res => {
-                console.log(res)
-            })
+        axios({
+            method: "post",
+            url: "http://172.105.151.238:5000/",
+            data: formData,
+            headers: { "Content-Type": "multipart/form-data" },
+          })
+          .then(function (response) {
+            let urlHTML = '<a href=' + response.data + '>' + response.data + '</a>';
+            document.getElementById("output-area").innerHTML += urlHTML + '<br>';
+          })
+          .catch(function (response) {
+              console.log(response);
+          });
     }
 
     return (
-        <div >
-            <header className="App-header">
-                <div>
-                    <h4>
-                        Welcome to
-                    </h4>
-                    <h2>
-                        AudioPeeler!
-                    </h2>
+        <div id="page">
+            <div id="main-content">
+                <div id="title-area">
+                    <h2>Welcome to</h2>
+                    <h1>AudioPeeler</h1>
                 </div>
-
-                <input title={"sup"} type="file" id="file" onChange={changeHandler} className={"file_button"}/>
-                <br/>
-
-                {isFilePicked ? (<p className={"text"}> {selectedFile.name} </p>) : (<p className={"text"}> Nothing to see here </p>)}
-
-                <button className={"button"} onClick={uploadHandler}>
-                    Submit
-                </button>
-
-                <div>
-                    <audio id="audio_id" controls autoPlay loop>
-                        music.mp3
-                    </audio>
-                </div>
-
-
-                <div class="output_area">
-                    All the output will be here...
-                </div>
-            </header>
+                <input type="file" onChange={changeHandler} id="browse-button"/>
+                {isFilePicked ? (<p className={"file-name"}> {selectedFile.name} </p>) : (<p id={"file-name"}>No file selected...</p>)}
+                <button id="start-button" onClick={uploadHandler}>Start</button>
+                <audio id="audio_id" controls></audio>
+            </div>
+            <div id="output-area">
+                Output
+                <div id="output-file-name">No download ready...</div>
+                <button id="download">Download</button>
+            </div>
         </div>
     )};
 
