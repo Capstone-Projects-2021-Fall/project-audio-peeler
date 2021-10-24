@@ -1,7 +1,6 @@
 import axios from "axios";
 import './Mashup.css';
 import React, { useState } from 'react';
-import Home from "../home/Home";
 
 function Mashup(){
 
