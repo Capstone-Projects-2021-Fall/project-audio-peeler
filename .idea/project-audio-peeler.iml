@@ -2,11 +2,14 @@
 <module type="WEB_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/selenium/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/selenium/main/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/selenium/test/java" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/temp" />
       <excludeFolder url="file://$MODULE_DIR$/.tmp" />
       <excludeFolder url="file://$MODULE_DIR$/tmp" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="corretto-15" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>

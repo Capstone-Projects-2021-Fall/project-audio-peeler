@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/project-audio-peeler.iml" filepath="$PROJECT_DIR$/.idea/project-audio-peeler.iml" />
+      <module fileurl="file://$PROJECT_DIR$/selenium/selenium.iml" filepath="$PROJECT_DIR$/selenium/selenium.iml" />
     </modules>
   </component>
 </project>
