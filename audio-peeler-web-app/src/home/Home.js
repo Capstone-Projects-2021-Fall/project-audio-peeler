@@ -14,7 +14,7 @@ function Home(){
 
 
     function uploadHandler(){
-        var file = document.getElementById('file').files[0];
+        var file = document.getElementById('browse-button').files[0];
         var url = URL.createObjectURL(file);
         console.log(url);
         document.getElementById("audio_id").src = url;
@@ -33,48 +33,30 @@ function Home(){
           })
           .then(function (response) {
             let urlHTML = '<a href=' + response.data + '>' + response.data + '</a>';
-            document.getElementById("output").innerHTML += urlHTML + '<br>';
-            
+            document.getElementById("output-area").innerHTML += urlHTML + '<br>';
           })
           .catch(function (response) {
-              //handle error
               console.log(response);
           });
     }
 
-
-
     return (
-        <div >
-            <header className="App-header">
-                <div>
-                    <h4>
-                        Welcome to
-                    </h4>
-                    <h2>
-                        AudioPeeler!
-                    </h2>
+        <div id="page">
+            <div id="main-content">
+                <div id="title-area">
+                    <h2>Welcome to</h2>
+                    <h1>AudioPeeler</h1>
                 </div>
-
-                <input title={"sup"} type="file" id="file" onChange={changeHandler} className={"file_button"}/>
-                <br/>
-
-                {isFilePicked ? (<p className={"text"}> {selectedFile.name} </p>) : (<p className={"text"}> Nothing to see here </p>)}
-
-                <button className={"button"} onClick={uploadHandler}>
-                    Submit
-                </button>
-
-                <div>
-                    <audio id="audio_id" controls>
-                        music.mp3
-                    </audio>
-                </div>
-
-
-                <div id="output" class="output_area">
-                </div>
-            </header>
+                <input type="file" onChange={changeHandler} id="browse-button"/>
+                {isFilePicked ? (<p className={"file-name"}> {selectedFile.name} </p>) : (<p id={"file-name"}>No file selected...</p>)}
+                <button id="start-button" onClick={uploadHandler}>Start</button>
+                <audio id="audio_id" controls></audio>
+            </div>
+            <div id="output-area">
+                Output
+                <div id="output-file-name">No download ready...</div>
+                <button id="download">Download</button>
+            </div>
         </div>
     )};
 

@@ -1,17 +1,45 @@
 import React, {useState} from 'react';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+  } from "react-router-dom";
 import './App.css';
+import Home from "./home/Home";
+import Mashup from './mashup/Mashup';
+import Samplers from './samplers/Samplers';
 import Routing from "./Routing.js"
 import axios from 'axios';
 
-function App() {
-
-
+export default function App() {
     return (
-        <div>
-            <Routing/>
-        </div>
-    )
-};
-
-
-export default App;
+      <Router>
+          <div id="header">
+              <button class="nav-button">Try the App!</button>
+        <Link to="/mashup">
+            <div class="nav-button" id="mashup-button">Mashup</div>
+        </Link>
+        <Link to="/samplers">
+            <div class="nav-button" id="samplers-button">Samplers</div>
+        </Link>
+        <Link to="/">
+            <div class="nav-button" id="home-button">Home</div>
+        </Link>
+          {/* A <Switch> looks through its children <Route>s and
+              renders the first one that matches the current URL. */}
+          <Switch>
+            <Route path="/mashup">
+              <Mashup />
+            </Route>
+            <Route path="/samplers">
+              <Samplers />
+            </Route>
+            <Route path="/">
+              <Home />
+            </Route>
+          </Switch>
+          </div>
+      </Router>
+    );
+  }
