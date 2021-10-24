@@ -9,22 +9,21 @@ import './App.css';
 import Home from "./home/Home";
 import Mashup from './mashup/Mashup';
 import Samplers from './samplers/Samplers';
-import Routing from "./Routing.js"
 import axios from 'axios';
 
 export default function App() {
     return (
       <Router>
           <div id="header">
-              <button class="nav-button">Try the App!</button>
+              <button className="nav-button">Try the App!</button>
         <Link to="/mashup">
-            <div class="nav-button" id="mashup-button">Mashup</div>
+            <div className="nav-button" id="mashup-button">Mashup</div>
         </Link>
         <Link to="/samplers">
-            <div class="nav-button" id="samplers-button">Samplers</div>
+            <div className="nav-button" id="samplers-button">Samplers</div>
         </Link>
         <Link to="/">
-            <div class="nav-button" id="home-button">Home</div>
+            <div className="nav-button" id="home-button">Home</div>
         </Link>
           {/* A <Switch> looks through its children <Route>s and
               renders the first one that matches the current URL. */}
