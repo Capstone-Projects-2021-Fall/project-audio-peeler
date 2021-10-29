@@ -12,11 +12,20 @@ function Home(){
         setIsFilePicked(true);
     };
 
+    var downloadReady = false;
+    var downloadLink = "";
+
+    function tryDownload() {
+        if (downloadReady) window.location.href = downloadLink;
+    }
 
     function uploadHandler(){
         var file = document.getElementById('browse-button').files[0];
+        downloadLink = "";
+        downloadReady = false;
+        document.getElementById('download').classList.remove('download-ready');
+        document.getElementById("output-file-name").innerHTML = "No download ready...";
         var url = URL.createObjectURL(file);
-        console.log(url);
         document.getElementById("audio_id").src = url;
 
         const formData = new FormData()
@@ -25,6 +34,7 @@ function Home(){
             selectedFile,
             //this.state.selectedFile.name
         )
+
         axios({
             method: "post",
             url: "http://172.105.151.238:5000/",
@@ -32,8 +42,13 @@ function Home(){
             headers: { "Content-Type": "multipart/form-data" },
           })
           .then(function (response) {
+            downloadLink = response.data;
+            downloadReady = true;
+            document.getElementById("output-file-name").innerHTML = "Download ready!";
+            /*
             let urlHTML = '<a href=' + response.data + '>' + response.data + '</a>';
             document.getElementById("output-area").innerHTML += urlHTML + '<br>';
+            */
           })
           .catch(function (response) {
               console.log(response);
@@ -55,7 +70,7 @@ function Home(){
             <div id="output-area">
                 Output
                 <div id="output-file-name">No download ready...</div>
-                <button id="download">Download</button>
+                <button id="download" onClick={tryDownload}>Download</button>
             </div>
         </div>
     )};

@@ -6,6 +6,9 @@ import {
     Link
   } from "react-router-dom";
 import './App.css';
+import './home/Home.css';
+import './mashup/Mashup.css';
+import './samplers/Samplers.css';
 import Home from "./home/Home";
 import Mashup from './mashup/Mashup';
 import Samplers from './samplers/Samplers';
