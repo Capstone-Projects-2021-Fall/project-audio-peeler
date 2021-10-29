@@ -43,7 +43,7 @@ export default function App() {
 
   const stopRecording = async () => {
     try {
-      onsole.log("Stopping recording..");
+      console.log("Stopping recording..");
       await recording.stopAndUnloadAsync();
       const result = recording.getURI();
       SetRecordedURI(result); // Here is the URI
@@ -85,43 +85,15 @@ export default function App() {
       console.log(error);
     }
   };
-// export default function App() {
-//   const [RecordedURI, SetRecordedURI] = useState("");
-//   const [isRecording, SetisRecording] = useState(false);
-//   async function startRecording() {
-    // try {
-    // console.log("Requesting permissions..");
-    // await Audio.requestPermissionsAsync();
-    // await Audio.setAudioModeAsync({
-    //   allowsRecordingIOS: true,
-    //   playsInSilentModeIOS: true,
-    // });
-    // console.log("Starting recording..");
-//     await recording.prepareToRecordAsync(
-//       Audio.RECORDING_OPTIONS_PRESET_HIGH_QUALITY
-//     );
-//     await recording.startAsync();
-//     SetisRecording(true)
-//     console.log("Recording started");
-//   } catch (err) {
-//     console.error("Failed to start recording", err);
-//   }
-// }
-
-// async function stopRecording() {
-//   console.log("Stopping recording..");
-//   await recording.stopAndUnloadAsync();
-//   const result = recording.getURI();
-//   SetRecordedURI(result); // we have to write only result instead or result.uri
-//   SetisRecording(false)
-//   console.log("Recording stopped and stored at", result); // Replace result.uri with result
-// }
 
   return (
     <View style={styles.container}>
       <Text>Welcome to</Text>
       <Text style={{fontSize:18}}>Audio Peeler</Text>
       <StatusBar style="auto" />
+      <Button
+        title='Browse...'
+      />
       <Button
         title={isRecording ? 'Stop Recording' : 'Start Recording'}
         onPress={isRecording ? () => stopRecording() : () => startRecording()}
