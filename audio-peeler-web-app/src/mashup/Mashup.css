@@ -1,0 +1,9 @@
+#mashup-files-container {
+    display: flex;
+    align-items: center;
+    justify-items: center;
+}
+
+.mashup-file {
+    margin: var(--global-spacing);
+}
