@@ -1,6 +1,5 @@
-import axios from "axios";
 import './Mashup.css';
-import React, { useState } from 'react';
+import React from 'react';
 
 function Mashup(){
 
