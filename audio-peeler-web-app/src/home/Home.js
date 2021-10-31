@@ -80,6 +80,7 @@ function Home() {
                 Output
                 <div id="output-file-name">No download ready...</div>
                 <button id="download" onClick={tryDownload}>Download</button>
+
                 {parseInProgress ? <Loader style={{marginTop:"10px"}} type="Bars" color="white" height={80} width={80}/> : ""}
 
             </div>
