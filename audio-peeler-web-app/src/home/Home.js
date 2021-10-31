@@ -19,7 +19,7 @@ function Home(){
         if (downloadReady) window.location.href = downloadLink;
     }
 
-    function uploadHandler(){
+    function uploadHandler() {
         var file = document.getElementById('browse-button').files[0];
         downloadLink = "";
         downloadReady = false;

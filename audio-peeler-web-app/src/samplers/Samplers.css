@@ -14,6 +14,7 @@
 
 #main-content-samplers #title-area {
     padding: 0px;
+    margin-bottom: 20px;
 }
 
 #samples {
@@ -50,9 +51,15 @@
 }
 
 .sample .sample-component .play-component {
+    background-image: url("../pics/play.png");
     float: left;
+    width: 48px;
+    height: 48px;
 }
 
 .sample .sample-component .download-component {
+    background-image: url("../pics/download.png");
     float: right;
+    width: 48px;
+    height: 48px;
 }

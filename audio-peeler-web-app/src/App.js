@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {
     BrowserRouter as Router,
     Switch,
@@ -12,7 +12,6 @@ import './samplers/Samplers.css';
 import Home from "./home/Home";
 import Mashup from './mashup/Mashup';
 import Samplers from './samplers/Samplers';
-import axios from 'axios';
 
 export default function App() {
     return (
