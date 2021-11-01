@@ -4,27 +4,8 @@ import React from 'react';
 function Samplers() {
 
     var audios = [];
-    var urls = [    //snake eater
-        "https://audiopeelerfilestorage.s3.us-east-2.amazonaws.com/demucs_quantized/Snake_Eater_Short/drums.wav",
-        "https://audiopeelerfilestorage.s3.us-east-2.amazonaws.com/demucs_quantized/Snake_Eater_Short/bass.wav",
-        "https://audiopeelerfilestorage.s3.us-east-2.amazonaws.com/demucs_quantized/Snake_Eater_Short/vocals.wav",
-        "https://audiopeelerfilestorage.s3.us-east-2.amazonaws.com/demucs_quantized/Snake_Eater_Short/other.wav",
-            // dum surfer
-        "https://audiopeelerfilestorage.s3.us-east-2.amazonaws.com/demucs_quantized/King+Krule+-+Dum+Surfer/drums.wav",
-        "https://audiopeelerfilestorage.s3.us-east-2.amazonaws.com/demucs_quantized/King+Krule+-+Dum+Surfer/bass.wav",
-        "https://audiopeelerfilestorage.s3.us-east-2.amazonaws.com/demucs_quantized/King+Krule+-+Dum+Surfer/vocals.wav",
-        "https://audiopeelerfilestorage.s3.us-east-2.amazonaws.com/demucs_quantized/King+Krule+-+Dum+Surfer/other.wav",
-            //psycho Killer
-        "https://audiopeelerfilestorage.s3.us-east-2.amazonaws.com/demucs_quantized/PsychoKiller/drums.wav",
-        "https://audiopeelerfilestorage.s3.us-east-2.amazonaws.com/demucs_quantized/PsychoKiller/drums.wav",
-        "https://audiopeelerfilestorage.s3.us-east-2.amazonaws.com/demucs_quantized/PsychoKiller/vocals.wav",
-        "https://audiopeelerfilestorage.s3.us-east-2.amazonaws.com/demucs_quantized/PsychoKiller/other.wav",
-            // Fly me to the moon
-        "https://audiopeelerfilestorage.s3.us-east-2.amazonaws.com/demucs_quantized/Fly/drums.wav",
-        "https://audiopeelerfilestorage.s3.us-east-2.amazonaws.com/demucs_quantized/Fly/bass.wav",
-        "https://audiopeelerfilestorage.s3.us-east-2.amazonaws.com/demucs_quantized/Fly/vocals.wav",
-        "https://audiopeelerfilestorage.s3.us-east-2.amazonaws.com/demucs_quantized/Fly/other.wav"
-    ];
+    var urls = ["https://audiopeelerfilestorage.s3.us-east-2.amazonaws.com/dumsurfer.mp3",
+    "https://audiopeelerfilestorage.s3.us-east-2.amazonaws.com/psychokiller.mp3"];
     var pp = {};
 
     var globalCurrentID = 0;
@@ -103,8 +84,8 @@ function Samplers() {
                 </div>
                 <div id="samples">
                     {getSampleObject("Snake Eater", globalCurrentID)}
-                    {getSampleObject("Dum Surfer", globalCurrentID+=4)}
-                    {getSampleObject("Psycho Killer", globalCurrentID+=4)}
+                    {getSampleObject("Que Sera Sera", globalCurrentID+=4)}
+                    {getSampleObject("Through the Wire", globalCurrentID+=4)}
                     {getSampleObject("Fly Me to the Moon", globalCurrentID+=4)}
                 </div>
             </div>
