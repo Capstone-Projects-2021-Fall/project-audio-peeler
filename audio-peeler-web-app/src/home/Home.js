@@ -1,22 +1,35 @@
 import axios from "axios";
 import './Home.css';
 import React, { useState } from 'react';
+import Loader from "react-loader-spinner";
 
 function Home(){
 
     const [selectedFile, setSelectedFile] = useState();
     const [isFilePicked, setIsFilePicked] = useState(false);
+    const [downloadLink, setDownloadLink] = useState("")
+    const [downloadReady, setDownloadReady] = useState(false)
+    const [parseInProgress, setParseInProgress] = useState(false);
 
     const changeHandler = (event) => {
         setSelectedFile(event.target.files[0]);
         setIsFilePicked(true);
     };
 
+    function tryDownload() {
+        console.log(downloadLink)
+        console.log(downloadReady)
+        if (downloadReady) window.location.href = downloadLink;
+    }
 
-    function uploadHandler(){
+    function uploadHandler() {
         var file = document.getElementById('browse-button').files[0];
+        setDownloadLink("");
+        setDownloadReady(false)
+        setParseInProgress(true)
+        document.getElementById('download').classList.remove('download-ready');
+        document.getElementById("output-file-name").innerHTML = "No download ready...";
         var url = URL.createObjectURL(file);
-        console.log(url);
         document.getElementById("audio_id").src = url;
 
         const formData = new FormData()
@@ -25,19 +38,26 @@ function Home(){
             selectedFile,
             //this.state.selectedFile.name
         )
+
         axios({
             method: "post",
             url: "http://172.105.151.238:5000/",
             data: formData,
             headers: { "Content-Type": "multipart/form-data" },
-          })
-          .then(function (response) {
-            let urlHTML = '<a href=' + response.data + '>' + response.data + '</a>';
-            document.getElementById("output-area").innerHTML += urlHTML + '<br>';
-          })
-          .catch(function (response) {
-              console.log(response);
-          });
+        })
+            .then(function (response) {
+                setDownloadLink(response.data);
+                setDownloadReady(true)
+                setParseInProgress(false)
+                document.getElementById("output-file-name").innerHTML = "Download ready!";
+                /*
+                let urlHTML = '<a href=' + response.data + '>' + response.data + '</a>';
+                document.getElementById("output-area").innerHTML += urlHTML + '<br>';
+                */
+            })
+            .catch(function (response) {
+                console.log(response);
+            });
     }
 
     return (
@@ -55,7 +75,8 @@ function Home(){
             <div id="output-area">
                 Output
                 <div id="output-file-name">No download ready...</div>
-                <button id="download">Download</button>
+                <button id="download" onClick={tryDownload}>Download</button>
+                {parseInProgress ? <Loader style={{marginTop:"10px"}} type="Bars" color="white" height={80} width={80}/> : ""}
             </div>
         </div>
     )};
