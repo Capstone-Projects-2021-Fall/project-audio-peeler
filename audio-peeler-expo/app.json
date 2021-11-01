@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "audio-peeler-expo",
-    "slug": "audio-peeler-expo",
+    "name": "audio-player",
+    "slug": "audio-player",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
