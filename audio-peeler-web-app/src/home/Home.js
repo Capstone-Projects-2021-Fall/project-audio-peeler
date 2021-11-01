@@ -41,7 +41,7 @@ function Home(){
 
         axios({
             method: "post",
-            url: "http://172.105.151.238:5000/",
+            url: "https://audio-peeler-server.com/",
             data: formData,
             headers: { "Content-Type": "multipart/form-data" },
         })
