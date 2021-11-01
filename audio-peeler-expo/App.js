@@ -1,16 +1,16 @@
-import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import AppNavigator from './app/navigation/AppNavigator';
-import AudioProvider from './app/context/AudioProvider';
-import { View } from 'react-native';
-import AudioListItem from './app/components/AudioListItem';
+import { StatusBar } from 'expo-status-bar';
+// import * as React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { StyleSheet, Text, View, Button } from 'react-native';
+import { Audio } from 'expo-av';
+import Home from "./components/home/Home";
+import styles from './App.component';
+
 
 export default function App() {
   return (
-    <AudioProvider>
-      <NavigationContainer>
-        <AppNavigator />
-      </NavigationContainer>
-    </AudioProvider>
+    <View style={styles.container}>
+      <Home/>
+    </View>
   );
 }
