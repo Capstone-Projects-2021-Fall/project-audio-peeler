@@ -16,7 +16,6 @@ export default function App() {
     return (
       <Router>
           <div id="header">
-              <button className="nav-button">Try the App!</button>
         <Link to="/mashup">
             <div className="nav-button" id="mashup-button">Mashup</div>
         </Link>

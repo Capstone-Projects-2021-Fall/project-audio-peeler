@@ -44,9 +44,10 @@ function Samplers() {
 
     function play(index) {
         var elementIndex = parseInt(index);
-        audios[elementIndex].play();
         if (pp[elementIndex]) {
             audios[elementIndex].pause();
+        } else {
+            audios[elementIndex].play();
         }
     }
 
