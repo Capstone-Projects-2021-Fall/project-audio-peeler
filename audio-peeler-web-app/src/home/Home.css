@@ -1,0 +1,20 @@
+#toggle-on-button {
+    background-color: var(--background-color-1);
+    width: 164px;
+    height: 32px;
+    color: white;
+    border-style: hidden;
+    padding: 0px var(--text-spacing);
+    font-size: 28px;
+    box-shadow: 0px 5px 4px black;
+}
+
+#toggle-off-button {
+    background-color: #5d5d5d;
+    width: 164px;
+    height: 32px;
+    color: white;
+    border-style: hidden;
+    padding: 0px var(--text-spacing);
+    font-size: 28px;
+}
