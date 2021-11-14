@@ -39,12 +39,12 @@ function URLUpload ({fileUrlToggleProp}) {
                     <button id="toggle-off-button" onClick={() => fileUrlToggleProp(true)}>File</button>
                     <button id="toggle-on-button"> URL</button>
                 </div>
-
+                {loading ? <p>"loading"</p> : text}
             </div>
             <div id="output-area">
                 Output
 
-                {loading ? <p>"loading"</p> : text}
+
 
             </div>
 

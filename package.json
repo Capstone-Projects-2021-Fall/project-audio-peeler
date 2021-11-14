@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "adm-zip": "^0.5.9",
+    "concurrently": "^6.4.0",
     "cors": "^2.8.5",
     "jszip": "^3.7.1"
   }

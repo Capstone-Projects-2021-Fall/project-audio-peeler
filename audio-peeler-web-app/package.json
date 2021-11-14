@@ -24,7 +24,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "server": "nodemon .//src//server//index.js",
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run start\""
   },
   "eslintConfig": {
     "extends": [
