@@ -1,19 +1,71 @@
 import './Mashup.css';
 import React from 'react';
+import axios from "axios";
+import  { useState } from 'react';
+import Loader from "react-loader-spinner";
+
+
+
+
 
 function Mashup(){
 
-    var changeHandler = function() {
 
+    const [selectedFile, setSelectedFile] = useState();
+    const [isFilePicked, setIsFilePicked] = useState(false);
+    const [downloadLink, setDownloadLink] = useState("")
+    const [downloadReady, setDownloadReady] = useState(false)
+    const [parseInProgress, setParseInProgress] = useState(false);
+
+    const changeHandler = (event) => {
+        setSelectedFile(event.target.files[0]);
+        setIsFilePicked(true);
+    };
+
+    function uploadHandler() {
+        var file = document.getElementById('browse-button').files[0];
+        setDownloadLink("");
+        setDownloadReady(false)
+        setParseInProgress(true)
+        document.getElementById('download').classList.remove('download-ready');
+        document.getElementById("output-file-name").innerHTML = "No download ready...";
+        var url = URL.createObjectURL(file);
+        document.getElementById("audio_id").src = url;
+
+        const formData = new FormData()
+        formData.append(
+            'file',
+            selectedFile,
+            //this.state.selectedFile.name
+        )
+
+        axios({
+            method: "post",
+            url: "https://audio-peeler-server.com/",
+            data: formData,
+            headers: { "Content-Type": "multipart/form-data" },
+        })
+            .then(function (response) {
+                setDownloadLink(response.data);
+                setDownloadReady(true)
+                setParseInProgress(false)
+                document.getElementById("output-file-name").innerHTML = "Download ready!";
+                /*
+                let urlHTML = '<a href=' + response.data + '>' + response.data + '</a>';
+                document.getElementById("output-area").innerHTML += urlHTML + '<br>';
+                */
+            })
+            .catch(function (response) {
+                console.log(response);
+            });
     }
 
-    var uploadHandler = function() {
-
+    function tryDownload() {
+        console.log(downloadLink)
+        console.log(downloadReady)
+        if (downloadReady) window.location.href = downloadLink;
     }
-
-    var isFilePicked = false;
-    var selectedFile = null;
-
+   
 
     return (
         <div id="page">
@@ -39,7 +91,8 @@ function Mashup(){
             <div id="output-area">
                 Output
                 <div id="output-file-name">No download ready...</div>
-                <button id="download">Download</button>
+                <button id="download" onClick={tryDownload}>Download</button>
+                {parseInProgress ? <Loader style={{marginTop:"10px"}} type="Bars" color="white" height={80} width={80}/> : ""}
             </div>
         </div>
     )};
