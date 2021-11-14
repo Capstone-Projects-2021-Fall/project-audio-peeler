@@ -13,8 +13,8 @@ function URLUpload ({fileUrlToggleProp}) {
                 <div id="title-area">
                     <h2>Welcome to</h2>
                     <h1>AudioPeeler</h1>
-                    <button id="toggle-off-button" onClick={() => fileUrlToggleProp(true)}>File</button>
-                    <button id="toggle-on-button"> URL</button>
+                    <button id="toggle-off-button" className="left-toggle-button" onClick={() => fileUrlToggleProp(true)}>File</button>
+                    <button id="toggle-on-button" className="right-toggle-button"> URL</button>
                 </div>
 
             </div>

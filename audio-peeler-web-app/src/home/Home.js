@@ -8,13 +8,12 @@ function Home() {
     const [isJohn, setIsJohn] = useState(true);
 
     function togglable () {
-        setIsJohn(!isJohn)
+        setIsJohn(!isJohn);
     }
 
     function fileUrlToggle(childData) {
         setIsJohn(childData)
     }
-
 
     return (
         <div id="page">

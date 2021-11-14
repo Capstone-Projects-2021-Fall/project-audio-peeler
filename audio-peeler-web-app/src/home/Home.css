@@ -18,3 +18,11 @@
     padding: 0px var(--text-spacing);
     font-size: 28px;
 }
+
+.left-toggle-button {
+    border-radius: 20px 0px 0px 20px;
+}
+
+.right-toggle-button {
+    border-radius: 0px 20px 20px 0px;
+}

@@ -69,8 +69,8 @@ function FileUpload({fileUrlToggleProp}) {
                 <div id="title-area">
                     <h2>Welcome to</h2>
                     <h1>AudioPeeler</h1>
-                    <button id="toggle-on-button">File</button>
-                    <button id="toggle-off-button" onClick={() => fileUrlToggleProp(false)}>URL</button>
+                    <button id="toggle-on-button" className="left-toggle-button">File</button>
+                    <button id="toggle-off-button" className="right-toggle-button" onClick={() => fileUrlToggleProp(false)}>URL</button>
                 </div>
                 <input type="file" onChange={changeHandler} id="browse-button"/>
                 {isFilePicked ? (<p className={"file-name"}> {selectedFile.name} </p>) : (
