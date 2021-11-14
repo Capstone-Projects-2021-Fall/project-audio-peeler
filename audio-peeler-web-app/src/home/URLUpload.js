@@ -1,9 +1,29 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import './Home.css';
-import FileUrlContext from "../FileUrlContext";
-import Loader from "react-loader-spinner";
+import JSZip from "jszip";
+
+const zip = new JSZip();
+
+async function retrieveZip(filename) {
+    const response = await fetch("http://localhost:5000/zip/" + filename);
+    const jsonData = await response.json();
+
+
+    return jsonData;
+}
 
 function URLUpload ({fileUrlToggleProp}) {
+    const [data, setData] = React.useState([]);
+    const [loading, setLoading] = React.useState(true);
+
+
+    useEffect(() => {
+        retrieveZip("gobou").then(data => {
+            setData(data);
+            console.log(data)
+        })
+        setLoading(false)
+    }, [])
 
 
     return(
@@ -20,6 +40,8 @@ function URLUpload ({fileUrlToggleProp}) {
             </div>
             <div id="output-area">
                 Output
+
+                {loading ? <p>"loading"</p> : <p>{data[0].entryName}</p>}
 
             </div>
 
