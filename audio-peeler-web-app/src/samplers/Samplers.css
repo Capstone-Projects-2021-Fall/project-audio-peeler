@@ -57,9 +57,102 @@
     height: 48px;
 }
 
+.sample .sample-component .pause-component {
+    background-image: url("../pics/pause.png");
+    float: left;
+    width: 48px;
+    height: 48px;
+}
+
 .sample .sample-component .download-component {
     background-image: url("../pics/download.png");
     float: right;
     width: 48px;
     height: 48px;
+}
+
+/*
+
+MEDIA
+
+*/
+
+@media only screen and (max-width: 660px),
+            screen and (max-height: 660px) {
+    #main-content-samplers {
+        width: 100%;
+        height: 100vh;
+        min-height: 100px;
+        color: black;
+        padding: 0px;
+        padding-top: 10px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        background-color: var(--background-color-2);
+    }
+
+    #main-content-samplers #title-area {
+        padding: 0px;
+        margin-bottom: 0px;
+    }
+
+    #samples {
+        margin-bottom: var(--global-spacing);
+    }
+
+    .sample {
+        width: 90vw;
+        background: var(--background-color-1);
+        border-radius: 5px;
+        padding: var(--text-spacing);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 10px;
+        box-shadow: 0px 0px
+    }
+
+    .sample .sample-title {
+        font-size: 2vmax;
+    }
+
+    .sample .sample-component {
+        float: left;
+        padding-left: 0px;
+        font-size: 2vmax;
+    }
+
+    .sample .sample-component {
+        color: white;
+    }
+
+    .sample .sample-component .play-component {
+        background-image: url("../pics/play.png");
+        background-size: 3vmax;
+        background-repeat: no-repeat;
+        float: left;
+        width: 3vmax;
+        height: 3vmax;
+    }
+
+    .sample .sample-component .pause-component {
+        background-image: url("../pics/pause.png");
+        background-size: 3vmax;
+        background-repeat: no-repeat;
+        float: left;
+        width: 3vmax;
+        height: 3vmax;
+    }
+
+    .sample .sample-component .download-component {
+        background-image: url("../pics/download.png");
+        background-size: 3vmax;
+        background-repeat: no-repeat;
+        float: left;
+        width: 3vmax;
+        height: 3vmax;
+    }
 }

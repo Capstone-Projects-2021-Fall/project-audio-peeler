@@ -44,9 +44,14 @@ function Samplers() {
 
     function play(index) {
         var elementIndex = parseInt(index);
-        audios[elementIndex].play();
         if (pp[elementIndex]) {
+            document.getElementById(index.toString()).classList.remove('pause-component');
+            document.getElementById(index.toString()).classList.add('play-component');
             audios[elementIndex].pause();
+        } else {
+            document.getElementById(index.toString()).classList.add('pause-component');
+            document.getElementById(index.toString()).classList.remove('play-component');
+            audios[elementIndex].play();
         }
     }
 
@@ -73,7 +78,7 @@ function Samplers() {
             <div className="sample-component">
                 {name}
                 <br/>
-                <div className="play-component" onClick={() => play(i)}></div>
+                <div id={i} className="play-component" onClick={() => play(i)}></div>
                 <div className="download-component" onClick={() => download(i)}></div>
             </div>
         )
