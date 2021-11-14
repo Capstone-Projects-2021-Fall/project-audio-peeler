@@ -16,6 +16,7 @@ function FileUpload({fileUrlToggleProp}) {
     const changeHandler = (event) => {
         setSelectedFile(event.target.files[0]);
         setIsFilePicked(true);
+        document.getElementsByClassName('file-name')[0].innerHTML = event.target.files[0].name;
     };
 
     function tryDownload() {
@@ -25,6 +26,7 @@ function FileUpload({fileUrlToggleProp}) {
     }
 
     function uploadHandler() {
+        if (!isFilePicked) return;
         var file = document.getElementById('browse-button').files[0];
         setDownloadLink("");
         setDownloadReady(false)
@@ -58,7 +60,8 @@ function FileUpload({fileUrlToggleProp}) {
                 */
             })
             .catch(function (response) {
-                console.log(response);
+                setParseInProgress(false);
+                document.getElementsByClassName('file-name')[0].innerHTML = "Error uploading file...";
             });
     }
 
