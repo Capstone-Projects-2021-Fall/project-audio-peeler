@@ -14,15 +14,18 @@ async function retrieveZip(filename) {
 
 function URLUpload ({fileUrlToggleProp}) {
     const [data, setData] = React.useState([]);
+    const [text, setText] = React.useState([]);
     const [loading, setLoading] = React.useState(true);
 
 
     useEffect(() => {
         retrieveZip("gobou").then(data => {
             setData(data);
+            setLoading(false)
+            data.forEach((x) =>{setText(text => [...text, <p>{x.entryName}</p>])})
             console.log(data)
         })
-        setLoading(false)
+
     }, [])
 
 
@@ -41,7 +44,7 @@ function URLUpload ({fileUrlToggleProp}) {
             <div id="output-area">
                 Output
 
-                {loading ? <p>"loading"</p> : <p>{data[0].entryName}</p>}
+                {loading ? <p>"loading"</p> : text}
 
             </div>
 
