@@ -36,10 +36,21 @@ function Mashup(){
                 </div>
                 <button id="start-button" onClick={uploadHandler}>Start</button>
             </div>
-            <div id="output-area">
-                Output
-                <div id="output-file-name">No download ready...</div>
-                <button id="download">Download</button>
+            <div className="mashup-component-container">
+                <div className="mashup-component-title">
+                    Title
+                </div>
+                <div className="mashup-components">
+                    <div className="mashup-component">
+                        Drums
+                        <div className="mashup-component-box">
+                            <div className="check"></div>
+                        </div>
+                    </div>
+                    <div className="mashup-component"></div>
+                    <div className="mashup-component"></div>
+                    <div className="mashup-component"></div>
+                </div>
             </div>
         </div>
     )};

@@ -7,3 +7,84 @@
 .mashup-file {
     margin: var(--global-spacing);
 }
+
+.mashup-component-container {
+    background: var(--background-color-1);
+    border-radius: 20px;
+    width: 80vw;
+    height: 10vh;
+    padding: 0px;
+}
+
+.mashup-component-title {
+    float: left;
+    padding: var(--text-spacing);
+    padding: 0px;
+    height: 10vh;
+    width: 20vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mashup-components {
+    float: right;
+    padding: var(--text-spacing);
+    width: 60vw;
+    height: 10vh;
+    display: flex;
+    justify-content: space-around;
+}
+
+.mashup-component {
+    width: 10vh;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mashup-component-box {
+    position: relative;
+    margin-top: 1vh;
+    width: 4vh;
+    height: 4vh;
+    background: white;
+    border-radius: 5px;
+    box-shadow: inset 0px 2px 4px var(--background-color-2);
+}
+
+.mashup-component-box .check:before {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    content: '\274c';
+    line-height: 4vh;
+    text-align: center;
+} 
+
+#mashup-output-area {
+    
+}
+
+#mashup-play-area {
+
+}
+
+#mashup-play-area .play {
+    
+}
+
+#mashup-play-area .pause {
+    
+}
+
+#mashup-download-area {
+
+}
+
+.mashup-download {
+
+}

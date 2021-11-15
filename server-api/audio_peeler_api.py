@@ -9,10 +9,7 @@ def send_file_to_demucs(file):
 @app.route("/", methods=["POST"])
 def hello():
     if request.method == 'POST':
-        received_song = request.get_data()
-        components = send_file_to_demucs(received_song)
-        # song will be handled by demucs and the compoent files will be returned
-        return 'received data: ' + components + '.'
+    	print(request.form['youtubeUrl'])
     return 'error'
 
 if __name__ == '__main__':

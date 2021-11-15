@@ -192,7 +192,7 @@ MEDIA
 
 */
 
-@media only screen and (max-width: 660px),
+@media screen and (max-width: 660px),
             screen and (max-height: 660px) {
 
   #page {

@@ -19,9 +19,9 @@ export default function App() {
     const value = useMemo(() => ({john, setJohn}), [john]);
 
     return (
-
         <Router>
-            <div id="header">
+            <meta name="viewport" content="width=device-width, initial-scale=1"/>
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>            <div id="header">
                 <Link to="/mashup">
                     <div className="nav-button" id="mashup-button">Mashup</div>
                 </Link>

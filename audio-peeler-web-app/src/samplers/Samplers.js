@@ -78,8 +78,10 @@ function Samplers() {
             <div className="sample-component">
                 {name}
                 <br/>
-                <div id={i} className="play-component" onClick={() => play(i)}></div>
-                <div className="download-component" onClick={() => download(i)}></div>
+                <div className="components-s">
+                    <div id={i} className="play-component" onClick={() => play(i)}></div>
+                    <div className="download-component" onClick={() => download(i)}></div>
+                </div>
             </div>
         )
     }
