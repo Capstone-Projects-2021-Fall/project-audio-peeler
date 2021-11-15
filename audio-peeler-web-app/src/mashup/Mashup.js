@@ -17,7 +17,7 @@ function Mashup(){
 
     return (
         <div id="page">
-            <div id="main-content">
+            <div id="main-content-mashup">
                 <div id="title-area">
                     <h1>Mash it up!</h1>
                     <br/>
@@ -36,7 +36,13 @@ function Mashup(){
                 </div>
                 <button id="start-button" onClick={uploadHandler}>Start</button>
             </div>
-            <div className="mashup-component-container">
+        </div>
+    )};
+
+export default Mashup;
+
+/**
+ * <div className="mashup-component-container">
                 <div className="mashup-component-title">
                     Title
                 </div>
@@ -52,7 +58,4 @@ function Mashup(){
                     <div className="mashup-component"></div>
                 </div>
             </div>
-        </div>
-    )};
-
-export default Mashup;
+ */

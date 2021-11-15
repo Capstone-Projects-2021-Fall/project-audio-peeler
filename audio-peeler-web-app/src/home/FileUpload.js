@@ -16,7 +16,6 @@ function FileUpload({fileUrlToggleProp}) {
     const changeHandler = (event) => {
         setSelectedFile(event.target.files[0]);
         setIsFilePicked(true);
-        document.getElementsByClassName('file-name')[0].innerHTML = event.target.files[0].name;
     };
 
     function tryDownload() {
