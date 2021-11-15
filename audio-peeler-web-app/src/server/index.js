@@ -3,7 +3,8 @@ const app = express();
 const cors = require("cors");
 const fs = require('fs')
 let AdmZip = require("adm-zip");
-
+const { file } = require("jszip");
+const path = require("path");
 app.use(cors());
 app.use(express.json());
 
@@ -13,13 +14,14 @@ app.use(express.json());
 app.get("/zip/:filename", async(req, res) =>{
     try{
         const {filename} = req.params;
+        console.log(filename)
 
         /**
          * Checks to see if the file exists, if it does it confirms it in the console log for the
          * server.
          */
         try {
-            if (fs.existsSync(`../${filename}.zip`)) {
+            if (fs.existsSync(`${filename}.zip`)) {
                 console.log("it exists")
             }
         } catch(err) {
@@ -52,7 +54,7 @@ app.get("/zip/:filename", async(req, res) =>{
          *       toString: [Function: toString]
          *
          */
-        let zip = new AdmZip(`../${filename}.zip`);
+        let zip = new AdmZip(`${filename}.zip`);
         let zipEntries = zip.getEntries();
 
         /**
@@ -67,5 +69,5 @@ app.get("/zip/:filename", async(req, res) =>{
 })
 
 app.listen(5001, () =>{
-    console.log("server has started on port 5000");
+    console.log("server has started on port 5001");
 } );
