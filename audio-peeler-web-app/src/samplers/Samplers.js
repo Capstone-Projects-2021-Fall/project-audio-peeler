@@ -16,7 +16,7 @@ function Samplers() {
         "https://audiopeelerfilestorage.s3.us-east-2.amazonaws.com/demucs_quantized/King+Krule+-+Dum+Surfer/other.wav",
         //psycho Killer
         "https://audiopeelerfilestorage.s3.us-east-2.amazonaws.com/demucs_quantized/PsychoKiller/drums.wav",
-        "https://audiopeelerfilestorage.s3.us-east-2.amazonaws.com/demucs_quantized/PsychoKiller/drums.wav",
+        "https://audiopeelerfilestorage.s3.us-east-2.amazonaws.com/demucs_quantized/PsychoKiller/bass.wav",
         "https://audiopeelerfilestorage.s3.us-east-2.amazonaws.com/demucs_quantized/PsychoKiller/vocals.wav",
         "https://audiopeelerfilestorage.s3.us-east-2.amazonaws.com/demucs_quantized/PsychoKiller/other.wav",
         // Fly me to the moon
@@ -44,10 +44,9 @@ function Samplers() {
 
     function play(index) {
         var elementIndex = parseInt(index);
+        audios[elementIndex].play();
         if (pp[elementIndex]) {
             audios[elementIndex].pause();
-        } else {
-            audios[elementIndex].play();
         }
     }
 
