@@ -1,4 +1,4 @@
-import JSZip, { files } from 'jszip';
+import * as fflate from 'fflate';
 
 var FILES = ["bass.wav", "drums.wav", "vocals.wav", "other.wav"];
 var c_increment = 0;
@@ -15,24 +15,18 @@ async function WavReader(response) {
         return file;
     }
 
-    var audios = [];
+    var audios = [new Audio(), new Audio(), new Audio(), new Audio()];
+    var c_index = 0;
     var file = createFile(response.data);
-        var new_zip = new JSZip();
-            new_zip.loadAsync(file)
-            .then(function(zip) {
-                for (var i = 0; i < FILES.length; i++) {
-                    // doesn't seem to be properly appending the new Audio file
-                    // FILES[c_increment returns strings representing the names of the files that are to be used in the 
-                    // zip.file function
-                    // might be because it's async
-                    // figure out where to put 'await' keyword 
-                    // look up await keyword/async functions
-                    zip.file(FILES[c_increment++]).async("base64").then(function(banana) {
-                        audios.push(new Audio("data:audio/wav;base64," + banana));
-                    });
-                }
-            });
-
+    var jsZip = require('jszip')
+    jsZip.loadAsync(file).then(function (zip) {
+    Object.keys(zip.files).forEach(function (filename) {
+        zip.files[filename].async('base64').then(function (banana) {
+             audios[c_index++].src = 'data:audio/wav;base64,' + banana;
+        })
+    })
+    });
+    console.log(audios);
     return audios;
 };
 

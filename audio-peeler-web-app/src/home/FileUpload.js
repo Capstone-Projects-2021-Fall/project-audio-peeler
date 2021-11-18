@@ -51,9 +51,11 @@ function FileUpload({fileUrlToggleProp}) {
         })
             .then(function (response) {
                 var wr = WavReader(response);
-                for (var i = 0; i < wr.length; i++) {
-                    console.log(wr[i] instanceof Audio);
-                }
+                wr.then((result) =>  {
+                    result.forEach((a, index) => {
+                        a.play();
+                    })
+                });
                 setDownloadLink(response.data);
                 setDownloadReady(true)
                 setParseInProgress(false)

@@ -12,6 +12,7 @@
     "@zip.js/zip.js": "^2.3.18",
     "axios": "^0.23.0",
     "extract-zip": "^2.0.1",
+    "fflate": "^0.7.1",
     "howler": "^2.2.3",
     "jquery": "^3.6.0",
     "jszip": "^3.7.1",
@@ -22,6 +23,8 @@
     "react-scripts": "^4.0.3",
     "require": "^2.4.20",
     "styled-components": "^5.3.1",
+    "uzip": "^0.20201231.0",
+    "uzip-module": "^1.0.3",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
