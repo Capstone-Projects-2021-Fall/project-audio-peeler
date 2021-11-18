@@ -2,6 +2,7 @@ import Loader from "react-loader-spinner";
 import axios from "axios";
 import './Home.css';
 import React, {useContext, useState} from 'react';
+import WavReader from "../WavReader.js";
 import FileUrlContext from "../FileUrlContext";
 
 function FileUpload({fileUrlToggleProp}) {
@@ -49,6 +50,10 @@ function FileUpload({fileUrlToggleProp}) {
             headers: { "Content-Type": "multipart/form-data" },
         })
             .then(function (response) {
+                var wr = WavReader(response);
+                for (var i = 0; i < wr.length; i++) {
+                    console.log(wr[i] instanceof Audio);
+                }
                 setDownloadLink(response.data);
                 setDownloadReady(true)
                 setParseInProgress(false)
@@ -59,11 +64,11 @@ function FileUpload({fileUrlToggleProp}) {
                 */
             })
             .catch(function (response) {
+                console.log(response);
                 setParseInProgress(false);
                 document.getElementsByClassName('file-name')[0].innerHTML = "Error uploading file...";
             });
     }
-
 
     return (
         <React.Fragment>

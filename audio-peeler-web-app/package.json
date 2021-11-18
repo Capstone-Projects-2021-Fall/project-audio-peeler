@@ -14,6 +14,7 @@
     "extract-zip": "^2.0.1",
     "howler": "^2.2.3",
     "jquery": "^3.6.0",
+    "jszip": "^3.7.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-loader-spinner": "^4.0.0",
