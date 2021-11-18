@@ -53,7 +53,8 @@ function FileUpload({fileUrlToggleProp}) {
                 var wr = WavReader(response);
                 wr.then((result) =>  {
                     result.forEach((a, index) => {
-                        a.play();
+                        // uncomment line below to play
+                        // a.play();
                     })
                 });
                 setDownloadLink(response.data);
