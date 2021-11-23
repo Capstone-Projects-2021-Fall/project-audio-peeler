@@ -11,8 +11,8 @@ function URLUpload ({fileUrlToggleProp}) {
         <React.Fragment>
             <div id="main-content">
                 <div id="title-area">
-                    <h2>Welcome to</h2>
-                    <h1>AudioPeeler</h1>
+                    <h2>URL</h2>
+                    <h1>Here</h1>
                     <button id="toggle-off-button" className="left-toggle-button" onClick={() => fileUrlToggleProp(true)}>File</button>
                     <button id="toggle-on-button" className="right-toggle-button"> URL</button>
                 </div>
