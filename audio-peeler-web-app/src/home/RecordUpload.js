@@ -2,15 +2,14 @@ import React, { useContext, useState } from 'react';
 import axios from "axios";
 import Loader from "react-loader-spinner";
 import FileUrlContext from "../FileUrlContext";
+import WavReader from "../WavReader.js";
 
 function RecordUpload({ fileUrlToggleProp }) {
+  const [selectedFile, setSelectedFile] = useState();
   const [downloadLink, setDownloadLink] = useState("")
   const [downloadReady, setDownloadReady] = useState(false)
   const [parseInProgress, setParseInProgress] = useState(false);
-
-  // const recordBtn = document.getElementById("record-btn");
-
-  // const player = document.getElementById("audio-player");
+  const [isFilePicked, setIsFilePicked] = useState(false);
 
   if (navigator.mediaDevices.getUserMedia) {
     var chunks = [];
@@ -44,9 +43,14 @@ function RecordUpload({ fileUrlToggleProp }) {
 
         mediaRecorder.onstop = e => {
           var blob = new Blob(chunks, { type: "audio/ogg; codecs=opus" });
+
           chunks = [];
           var audioURL = window.URL.createObjectURL(blob);
           player.src = audioURL;
+          console.log('audioURL:' + audioURL)
+
+          setSelectedFile(blob);
+          setIsFilePicked(true);
         };
       },
       () => {
@@ -64,6 +68,42 @@ function RecordUpload({ fileUrlToggleProp }) {
   }
 
   function uploadHandler() {
+    if (!isFilePicked) return;
+    setDownloadLink("");
+    setDownloadReady(false)
+    setParseInProgress(true)
+    document.getElementById('download').classList.remove('download-ready');
+    document.getElementById("output-file-name").innerHTML = "No download ready...";
+
+    const formData = new FormData()
+    formData.append(
+      'file',
+      selectedFile,
+    )
+    axios({
+      method: "post",
+      url: "https://audio-peeler-server.com/",
+      data: formData,
+      headers: { "Content-Type": "multipart/form-data" },
+    })
+      .then(function (response) {
+        var wr = WavReader(response);
+        wr.then((result) => {
+          result.forEach((a, index) => {
+            // uncomment line below to play
+            // a.play();
+          })
+        });
+        setDownloadLink(response.data);
+        setDownloadReady(true)
+        setParseInProgress(false)
+        document.getElementById("output-file-name").innerHTML = "Download ready!";
+      })
+      .catch(function (response) {
+        console.log(response);
+        setParseInProgress(false);
+      });
+
 
   }
 
