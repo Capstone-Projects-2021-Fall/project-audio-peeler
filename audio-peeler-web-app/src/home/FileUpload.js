@@ -2,7 +2,6 @@ import Loader from "react-loader-spinner";
 import axios from "axios";
 import './Home.css';
 import React, {useContext, useState} from 'react';
-import WavReader from "../WavReader.js";
 import FileUrlContext from "../FileUrlContext";
 
 function FileUpload({fileUrlToggleProp}) {
@@ -42,7 +41,6 @@ function FileUpload({fileUrlToggleProp}) {
             selectedFile,
             //this.state.selectedFile.name
         )
-
         axios({
             method: "post",
             url: "https://audio-peeler-server.com/",
@@ -50,13 +48,6 @@ function FileUpload({fileUrlToggleProp}) {
             headers: { "Content-Type": "multipart/form-data" },
         })
             .then(function (response) {
-                var wr = WavReader(response);
-                wr.then((result) =>  {
-                    result.forEach((a, index) => {
-                        // uncomment line below to play
-                        // a.play();
-                    })
-                });
                 setDownloadLink(response.data);
                 setDownloadReady(true)
                 setParseInProgress(false)

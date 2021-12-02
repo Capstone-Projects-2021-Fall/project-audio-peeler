@@ -1,4 +1,12 @@
-import * as fflate from 'fflate';
+/**
+ *  var wr = WavReader(response);
+    wr.then((result) =>  {
+        result.forEach((a, index) => {
+            // uncomment line below to play
+            // a.play();
+        })
+    });
+*/
 
 var FILES = ["bass.wav", "drums.wav", "vocals.wav", "other.wav"];
 var c_increment = 0;
