@@ -3,20 +3,30 @@ import Loader from "react-loader-spinner";
 import axios from "axios";
 import WavReader from "../WavReader.js";
 import React, {useContext, useState} from 'react';
+import Crunker from 'crunker';
+import { files } from 'jszip';
 
 function Mashup(){
+
+    var createBuffer = require('audio-buffer-from')
+    var bufferToWav = require('audiobuffer-to-wav')
 
     const [selectedFile, setSelectedFile] = useState();
     const [selectedFile2, setSelectedFile2] = useState();
     const [isFilePicked, setIsFilePicked] = useState(false);
     const [isFilePicked2, setIsFilePicked2] = useState(false);
     const [parseInProgress, setParseInProgress] = useState(false);
-    const [parseInProgress2, setParseInProgress2] = useState(false);
 
     var audiosComplete = [false, false];
 
+    var FILES = ["Vocals", "Bass", "Other", "Drums"];
+
     var audioToggles = [];
     for (var i = 0; i < 8; i++) audioToggles.push(false);
+
+    var globalAudios = [];
+
+    var paused = true;
 
     const changeHandler = (event) => {
         setSelectedFile(event.target.files[0]);
@@ -27,6 +37,14 @@ function Mashup(){
         setSelectedFile2(event.target.files[0]);
         setIsFilePicked2(true);
     };
+
+    function createComponents(fileNames, fileOneAudios, fileTwoAudios) {
+        setParseInProgress(false);
+        document.getElementById('mashup-component-container').innerHTML = "";
+        document.getElementById('phase-1-wrapper').innerHTML = '';
+        document.getElementById('mashup-component-container').appendChild(createMashupComponent(fileNames, [fileOneAudios, fileTwoAudios]));
+        document.getElementById('mashup-component-container').appendChild(createMashupControls());
+    }
 
     function uploadHandler() {
         if (!isFilePicked || !isFilePicked2) return;
@@ -58,14 +76,13 @@ function Mashup(){
             headers: { "Content-Type": "multipart/form-data" },
         })
             .then(function (response) {
-                console.log('file 1 response received');
                 var wr = WavReader(response);
                 wr.then((result) =>  {
                     result.forEach((a, index) => {
                         fileOneAudios.push(a);
                     })
                     audiosComplete[0] = true;
-                    if (!audiosComplete.includes(false)) document.getElementById('mashup-files-container').innerHTML = handleMashupComponent(createMashupComponent(fileNames, [fileOneAudios, fileTwoAudios]));
+                    if (!audiosComplete.includes(false)) createComponents(fileNames, fileOneAudios, fileTwoAudios);
                 })
             })
             .catch(function (response) {
@@ -81,14 +98,13 @@ function Mashup(){
             headers: { "Content-Type": "multipart/form-data" },
         })
             .then(function (response) {
-                console.log('file 2 response received');
                 var wrInner = WavReader(response);
                 wrInner.then((result) =>  {
                     result.forEach((a, index) => {
                         fileTwoAudios.push(a);
                     })
                     audiosComplete[1] = true;
-                    if (!audiosComplete.includes(false)) document.getElementById('mashup-files-container').innerHTML = handleMashupComponent(createMashupComponent(fileNames, [fileOneAudios, fileTwoAudios]));
+                    if (!audiosComplete.includes(false)) createComponents(fileNames, fileOneAudios, fileTwoAudios);
                 })
             })
             .catch(function (response) {
@@ -99,12 +115,76 @@ function Mashup(){
     }
 
     function handleToggle(elemId) {
+        globalAudios.forEach((audio, index) => {
+            audio.load();
+        });
+        document.getElementById('play-pause').classList.add('controls-play');
+        document.getElementById('play-pause').classList.remove('controls-pause');
         audioToggles[elemId] = !audioToggles[elemId];
         if (audioToggles[elemId]) document.getElementById(elemId).classList.add('toggle');
         else document.getElementById(elemId).classList.remove('toggle');
     }
 
+    function play() {
+        if (!paused) {
+            globalAudios.forEach((audios, index) => {
+                if (audioToggles[index]) audios.pause();
+            });
+            document.getElementById('play-pause').classList.add('controls-play');
+            document.getElementById('play-pause').classList.remove('controls-pause');
+        } else {
+            globalAudios.forEach((audios, index) => {
+                if (audioToggles[index]) audios.play();
+            });
+            document.getElementById('play-pause').classList.add('controls-pause');
+            document.getElementById('play-pause').classList.remove('controls-play');
+        }
+        paused = !paused;
+    }
+
+    function download() {
+        var selectedAudios = [];
+        globalAudios.forEach((audio, index) => {
+            if (audioToggles[index]) selectedAudios.push(audio.currentSrc);
+        });
+        console.log(selectedAudios);
+        let crunker = new Crunker();
+            crunker
+            .fetchAudio(selectedAudios)
+            .then(buffers => crunker.mergeAudio(buffers))
+            .then(merged => crunker.export(merged, "audio/mp3"))
+            .then(output => crunker.download(output.blob))
+            .catch(error => {
+                throw new Error(error);
+            });
+    }
+
     function createMashupComponent(names, audios) {
+        var mashupComponent = document.createElement('div');
+        mashupComponent.id = 'mashup-component';
+        audios.forEach((a, index) => {
+            var audioParent = document.createElement('div');
+            audioParent.classList.add('audio-wrapper');
+            var mashupAudioTitle = document.createElement('h1');
+            mashupAudioTitle.innerHTML = names[index];
+            audioParent.appendChild(mashupAudioTitle);
+            var mashupSounds = document.createElement('div');
+            mashupSounds.classList.add('mashup-sounds');
+            audioParent.appendChild(mashupSounds);
+            audios[index].forEach((sound, jndex) => {
+                globalAudios.push(sound);
+                var cIndex = jndex + (4 * index);
+                var toggleButton = document.createElement('div');
+                toggleButton.id = cIndex;
+                toggleButton.innerHTML = FILES[jndex];
+                toggleButton.classList.add('mashup-sound');
+                toggleButton.addEventListener('click', () => handleToggle(cIndex));
+                mashupSounds.appendChild(toggleButton);
+            });
+            mashupComponent.appendChild(audioParent);
+        });
+        return mashupComponent;
+        /*
         return (
             <div id="mashup-component">
                 {
@@ -122,34 +202,59 @@ function Mashup(){
                 }
             </div>
         )
+        */
     }
 
-    function handleMashupComponent(mashupComponent) {
-        return (
-            {mashupComponent}
-        )
+    function createMashupControls() {
+        var controlsWrapper = document.createElement('div');
+        controlsWrapper.id = 'controls-wrapper';
+        var textWrapper = document.createElement('div');
+        textWrapper.id = 'controls-text-wrapper';
+        var controlsTextField = document.createElement('input');
+        controlsTextField.type = 'text';
+        controlsTextField.placeholder = 'Mashup file name...'
+        textWrapper.appendChild(controlsTextField);
+        var mp3Label = document.createElement('p');
+        mp3Label.innerHTML = '.mp3';
+        textWrapper.appendChild(mp3Label);
+        controlsWrapper.appendChild(textWrapper);
+        var playButton = document.createElement('div');
+        playButton.id = 'play-pause';
+        playButton.classList.add('controls-play');
+        playButton.addEventListener('click', play);
+        controlsWrapper.appendChild(playButton);
+        var downloadButton = document.createElement('div');
+        downloadButton.id = 'controls-download';
+        downloadButton.addEventListener('click', download);
+        controlsWrapper.appendChild(downloadButton);
+        return controlsWrapper;
     }
 
     return (
         <div id="page">
             <div id="main-content-mashup">
-                <div id="title-area">
-                    <h1>Mash it up!</h1>
-                    <br/>
-                    <h3>Pick Two Songs</h3>
-                    <h3>And We'll Give You Every Variation between the Two</h3>
-                </div>
-                <div id="mashup-files-container">
-                    <div className="mashup-file">
-                        <input type="file" onChange={changeHandler} id="browse-button"/>
-                        {isFilePicked ? (<p className={"file-name"}> {selectedFile.name} </p>) : (<p id={"file-name"}>No file selected...</p>)}
+                <div id="phase-1-wrapper">
+                    <div id="title-area">
+                        <h1>Mash it up!</h1>
+                        <br/>
+                        <h3>Pick Two Songs</h3>
+                        <h3>And We'll Give You Every Variation between the Two</h3>
                     </div>
-                    <div className="mashup-file">
-                        <input type="file" onChange={changeHandler2} id="browse-button-2"/>
-                        {isFilePicked2 ? (<p className={"file-name"}> {selectedFile2.name} </p>) : (<p id={"file-name-2"}>No file selected...</p>)}
-                    </div>    
+                    <div id="mashup-files-container">
+                        <div className="mashup-file">
+                            <input type="file" onChange={changeHandler} id="browse-button"/>
+                            {isFilePicked ? (<p className={"file-name"}> {selectedFile.name} </p>) : (<p id={"file-name"}>No file selected...</p>)}
+                        </div>
+                        <div className="mashup-file">
+                            <input type="file" onChange={changeHandler2} id="browse-button-2"/>
+                            {isFilePicked2 ? (<p className={"file-name"}> {selectedFile2.name} </p>) : (<p id={"file-name-2"}>No file selected...</p>)}
+                        </div>    
+                    </div>
+                    <button id="start-button" onClick={uploadHandler}>Start</button>
+                    {parseInProgress ?
+                        <Loader style={{marginTop: "10px"}} type="Bars" color="white" height={80} width={80}/> : ""}
                 </div>
-                <button id="start-button" onClick={uploadHandler}>Start</button>
+                <div id="mashup-component-container"></div>
             </div>
         </div>
     )};
