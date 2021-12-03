@@ -3,6 +3,7 @@ import axios from "axios";
 import Loader from "react-loader-spinner";
 import FileUrlContext from "../FileUrlContext";
 import WavReader from "../WavReader.js";
+import { compressSync } from 'fflate';
 
 function RecordUpload({ fileUrlToggleProp }) {
   const [selectedFile, setSelectedFile] = useState();
@@ -39,17 +40,20 @@ function RecordUpload({ fileUrlToggleProp }) {
 
         mediaRecorder.ondataavailable = e => {
           chunks.push(e.data);
+          
         };
 
         mediaRecorder.onstop = e => {
           var blob = new Blob(chunks, { type: "audio/ogg; codecs=opus" });
-
+          
           chunks = [];
-          var audioURL = window.URL.createObjectURL(blob);
+          var audioURL = URL.createObjectURL(blob);
           player.src = audioURL;
           console.log('audioURL:' + audioURL)
+          // var audio_file = blobToFile(blob,"recording.ogg");
+          var audio_file = new File([blob],"recording.ogg");
 
-          setSelectedFile(blob);
+          setSelectedFile(audio_file);
           setIsFilePicked(true);
         };
       },
@@ -60,6 +64,12 @@ function RecordUpload({ fileUrlToggleProp }) {
   } else {
     console.error("Browser not support getUserMedia");
   }
+
+  // function blobToFile(blob,fileName){
+  //   blob.lastModifiedDate = new Date();
+  //   blob.name = fileName;
+  //   return blob;
+  // }
 
   function tryDownload() {
     console.log(downloadLink)
@@ -74,6 +84,7 @@ function RecordUpload({ fileUrlToggleProp }) {
     setParseInProgress(true)
     document.getElementById('download').classList.remove('download-ready');
     document.getElementById("output-file-name").innerHTML = "No download ready...";
+    console.log('Selected file: ' + selectedFile);
 
     const formData = new FormData()
     formData.append(
@@ -119,6 +130,8 @@ function RecordUpload({ fileUrlToggleProp }) {
         </div>
 
         <button id="record-btn" >Record</button>
+        {isFilePicked ? (<p className={"file-name"}> {selectedFile.name} </p>) : (
+            <p id={"file-name"}>No file selected...</p>)}
         <button id="start-button" onClick={uploadHandler}>Start</button>
         <audio controls id="audio-player"></audio>
       </div>
