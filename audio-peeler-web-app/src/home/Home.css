@@ -37,8 +37,13 @@
     box-shadow: inset 0px 1px 4px var(--background-color-2);
 }
 
+
 .left-toggle-button {
     border-radius: 20px 0px 0px 20px;
+}
+
+.middle-toggle-button {
+    border-radius: 0px 0px 0px 0px;
 }
 
 .right-toggle-button {
@@ -76,6 +81,10 @@ MEDIA
     
     .left-toggle-button {
         border-radius: 5px 0px 0px 5px;
+    }
+
+    .middle-toggle-button {
+        border-radius: 0px 0px 0px 0px;
     }
     
     .right-toggle-button {

@@ -68,6 +68,30 @@
   background-color: var(--background-color-2);
 }
 
+#record-btn {
+  background-color: #d51134;
+  width: 164px;
+  height: 42px;
+  color: white;
+  border-style: hidden;
+  padding: 0px var(--text-spacing);
+  font-size: 28px;
+  border-radius: 10px;
+  box-shadow: 0px 5px 4px black;
+}
+
+
+
+#record-btn:hover {
+  box-shadow: 0px 7px 7px black;
+  cursor: pointer;
+}
+
+#record-btn:active {
+  text-shadow: 0px 0px 5px white;
+}
+
+
 #title-area {
   font-size: 32px;
   line-height: 2.5rem;
@@ -140,6 +164,8 @@
 #start-button:active {
   text-shadow: 0px 0px 5px white;
 }
+
+
 
 #download {
   background-color: var(--background-color-2);
@@ -358,7 +384,7 @@ MEDIA
     bottom: 0px;
     height: 40vh;
     color: white;
-    padding: auto;
+
     font-size: 5vmax;
     background-color: var(--background-color-1);
     box-shadow: 0px 0px;

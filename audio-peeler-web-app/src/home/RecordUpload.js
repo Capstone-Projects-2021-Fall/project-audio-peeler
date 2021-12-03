@@ -28,12 +28,12 @@ function RecordUpload({ fileUrlToggleProp }) {
         recordBtn.onclick = () => {
           if (mediaRecorder.state === "recording") {
             mediaRecorder.stop();
-            recordBtn.textContent = "record";
+            recordBtn.textContent = "Record";
             console.log("record stopped");
           } else {
             mediaRecorder.start();
             console.log("recording...");
-            recordBtn.textContent = "stop";
+            recordBtn.textContent = "Stop";
           }
           console.log("recorder sate:", mediaRecorder.state);
         };
@@ -125,8 +125,9 @@ function RecordUpload({ fileUrlToggleProp }) {
         <div id="title-area">
           <h2>Welcome to</h2>
           <h1>AudioPeeler</h1>
-          <button id="toggle-off-button" className="left-toggle-button" onClick={() => fileUrlToggleProp(true)}>File</button>
-          <button id="toggle-on-button" className="right-toggle-button"> Record</button>
+          <button id="toggle-off-button" className="left-toggle-button" onClick={() => fileUrlToggleProp("file")}>File</button>
+            <button id="toggle-off-button" className="middle-toggle-button" onClick={() => fileUrlToggleProp("url")}>URL</button>
+          <button id="toggle-on-button" className="right-toggle-button"> Rec</button>
         </div>
 
         <button id="record-btn" >Record</button>

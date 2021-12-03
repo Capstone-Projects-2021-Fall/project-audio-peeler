@@ -5,7 +5,7 @@ import URLUpload from "./URLUpload";
 import RecordUpload from "./RecordUpload";
 
 function Home() {
-    const [isJohn, setIsJohn] = useState(true);
+    const [isJohn, setIsJohn] = useState("file");
 
     function fileUrlToggle(childData) {
         setIsJohn(childData)
@@ -16,7 +16,7 @@ function Home() {
 
 
             {/* { isJohn ? <FileUpload fileUrlToggleProp={fileUrlToggle}/> : <URLUpload fileUrlToggleProp={fileUrlToggle}/>} */}
-            { isJohn ? <FileUpload fileUrlToggleProp={fileUrlToggle}/> : <RecordUpload fileUrlToggleProp={fileUrlToggle}/>}
+            { isJohn === "file" ? <FileUpload fileUrlToggleProp={fileUrlToggle}/> : isJohn === "url" ? <URLUpload fileUrlToggleProp={fileUrlToggle}/> : isJohn === "record" ? <RecordUpload fileUrlToggleProp={fileUrlToggle}/> : ""}
 
 
         </div>

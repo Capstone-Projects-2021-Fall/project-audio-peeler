@@ -44,29 +44,6 @@ function URLUpload ({fileUrlToggleProp}) {
             document.getElementById("output-file-name").innerHTML = "Download ready!";
         });
 
-        /*
-        axios({
-            method: "post",
-            url: "http://127.0.0.1:5000/",
-            data: formData,
-            headers: { "Content-Type": "text/html; charset=UTF-8" },
-        })
-            .then(function (response) {
-                setDownloadLink(response.data);
-                setDownloadReady(true)
-                setParseInProgress(false)
-                document.getElementById("output-file-name").innerHTML = "Download ready!";
-                /*
-                let urlHTML = '<a href=' + response.data + '>' + response.data + '</a>';
-                document.getElementById("output-area").innerHTML += urlHTML + '<br>';
-                
-            })
-            .catch(function (response) {
-                console.log(response);
-                console.log(link);
-                setParseInProgress(false);
-            });
-            */
     }
 
     return(
@@ -76,8 +53,9 @@ function URLUpload ({fileUrlToggleProp}) {
                 <div id="title-area">
                     <h2>Welcome to</h2>
                     <h1>AudioPeeler</h1>
-                    <button id="toggle-off-button" className="left-toggle-button" onClick={() => fileUrlToggleProp(true)}>File</button>
-                    <button id="toggle-on-button" className="right-toggle-button"> URL</button>
+                    <button id="toggle-off-button" className="left-toggle-button" onClick={() => fileUrlToggleProp("file")}>File</button>
+                    <button id="toggle-on-button" className="middle-toggle-button"> URL</button>
+                    <button id="toggle-off-button" className="right-toggle-button" onClick={() => fileUrlToggleProp("record")}>Rec</button>
                 </div>
                 <input type="text" id="link-input" name="youtubeUrl" placeholder="Input URL here.." onChange={changeHandler}></input>
                 <button id="start-button" onClick={uploadHandler}>Start</button>
