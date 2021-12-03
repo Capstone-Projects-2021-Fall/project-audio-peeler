@@ -2,6 +2,7 @@ import './Home.css';
 import React, {useState} from 'react';
 import FileUpload from "./FileUpload";
 import URLUpload from "./URLUpload";
+import RecordUpload from "./RecordUpload";
 
 function Home() {
     const [isJohn, setIsJohn] = useState(true);
@@ -14,7 +15,9 @@ function Home() {
         <div id="page">
 
 
-            { isJohn ? <FileUpload fileUrlToggleProp={fileUrlToggle}/> : <URLUpload fileUrlToggleProp={fileUrlToggle}/>}
+            {/* { isJohn ? <FileUpload fileUrlToggleProp={fileUrlToggle}/> : <URLUpload fileUrlToggleProp={fileUrlToggle}/>} */}
+            { isJohn ? <FileUpload fileUrlToggleProp={fileUrlToggle}/> : <RecordUpload fileUrlToggleProp={fileUrlToggle}/>}
+
 
         </div>
     )
