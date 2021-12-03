@@ -1,8 +1,7 @@
 import Loader from "react-loader-spinner";
 import axios from "axios";
 import './Home.css';
-import React, {useContext, useState} from 'react';
-import FileUrlContext from "../FileUrlContext";
+import React, {useState} from 'react';
 
 function FileUpload({fileUrlToggleProp}) {
 

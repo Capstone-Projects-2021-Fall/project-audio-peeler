@@ -1,7 +1,5 @@
-import React, {useContext, useState} from 'react';
+import React, {useState} from 'react';
 import './Home.css';
-import axios from "axios";
-import FileUrlContext from "../FileUrlContext";
 import Loader from "react-loader-spinner";
 
 var $ = require('jquery');
@@ -22,7 +20,7 @@ function URLUpload ({fileUrlToggleProp}) {
     }
 
     function changeHandler() {
-        if (document.getElementById('link-input').value != "") {
+        if (document.getElementById('link-input').value !== "") {
             setLinkGiven(true);
         }
     }
@@ -74,7 +72,7 @@ function URLUpload ({fileUrlToggleProp}) {
     return(
 
         <React.Fragment>
-            <div id="main-content" id="sampler-main-content">
+            <div id="main-content">
                 <div id="title-area">
                     <h2>Welcome to</h2>
                     <h1>AudioPeeler</h1>

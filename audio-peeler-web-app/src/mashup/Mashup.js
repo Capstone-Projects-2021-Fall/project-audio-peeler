@@ -3,8 +3,7 @@ import Loader from "react-loader-spinner";
 import axios from "axios";
 import WavReader from "../WavReader.js";
 import Crunker from 'crunker'
-import React, {useContext, useState} from 'react';
-import { files } from 'jszip';
+import React, {useState} from 'react';
 
 function Mashup(){
 
@@ -24,8 +23,6 @@ function Mashup(){
     for (var i = 0; i < 8; i++) audioToggles.push(false);
 
     var globalAudios = [];
-
-    var globalBlobs = [];
 
     var paused = true;
 
