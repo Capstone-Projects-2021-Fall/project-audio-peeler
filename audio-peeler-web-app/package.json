@@ -11,6 +11,7 @@
     "@testing-library/user-event": "^12.8.3",
     "@zip.js/zip.js": "^2.3.18",
     "audio-buffer-from": "^1.1.1",
+    "audio-loader": "^1.0.3",
     "audiobuffer-to-wav": "^1.0.0",
     "axios": "^0.23.0",
     "crunker": "^1.2.1",

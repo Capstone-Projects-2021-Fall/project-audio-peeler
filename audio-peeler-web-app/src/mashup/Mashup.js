@@ -2,14 +2,13 @@ import './Mashup.css';
 import Loader from "react-loader-spinner";
 import axios from "axios";
 import WavReader from "../WavReader.js";
+import Crunker from 'crunker'
 import React, {useContext, useState} from 'react';
-import Crunker from 'crunker';
 import { files } from 'jszip';
 
 function Mashup(){
 
-    var createBuffer = require('audio-buffer-from')
-    var bufferToWav = require('audiobuffer-to-wav')
+    var load = require('audio-loader');
 
     const [selectedFile, setSelectedFile] = useState();
     const [selectedFile2, setSelectedFile2] = useState();
@@ -25,6 +24,8 @@ function Mashup(){
     for (var i = 0; i < 8; i++) audioToggles.push(false);
 
     var globalAudios = [];
+
+    var globalBlobs = [];
 
     var paused = true;
 
@@ -78,7 +79,7 @@ function Mashup(){
             .then(function (response) {
                 var wr = WavReader(response);
                 wr.then((result) =>  {
-                    result.forEach((a, index) => {
+                    result['audios'].forEach((a, index) => {
                         fileOneAudios.push(a);
                     })
                     audiosComplete[0] = true;
@@ -100,7 +101,7 @@ function Mashup(){
             .then(function (response) {
                 var wrInner = WavReader(response);
                 wrInner.then((result) =>  {
-                    result.forEach((a, index) => {
+                    result['audios'].forEach((a, index) => {
                         fileTwoAudios.push(a);
                     })
                     audiosComplete[1] = true;
@@ -143,20 +144,20 @@ function Mashup(){
     }
 
     function download() {
-        var selectedAudios = [];
-        globalAudios.forEach((audio, index) => {
-            if (audioToggles[index]) selectedAudios.push(audio.currentSrc);
+        var files = [];
+        globalAudios.forEach((a, index) => {
+            if (audioToggles[index]) {
+                files.push(a.src);
+            }
         });
-        console.log(selectedAudios);
-        let crunker = new Crunker();
-            crunker
-            .fetchAudio(selectedAudios)
-            .then(buffers => crunker.mergeAudio(buffers))
-            .then(merged => crunker.export(merged, "audio/mp3"))
-            .then(output => crunker.download(output.blob))
-            .catch(error => {
-                throw new Error(error);
-            });
+        var crunker = new Crunker();
+        load(files)
+        .then(buffers => crunker.mergeAudio(buffers))
+        .then(merged => crunker.export(merged, "audio/mp3"))
+        .then(output => crunker.download(output.blob, document.getElementById('download-file-name').value))
+        .catch(error => {
+            throw new Error(error);
+        });
     }
 
     function createMashupComponent(names, audios) {
@@ -213,9 +214,10 @@ function Mashup(){
         var controlsTextField = document.createElement('input');
         controlsTextField.type = 'text';
         controlsTextField.placeholder = 'Mashup file name...'
+        controlsTextField.id = 'download-file-name';
         textWrapper.appendChild(controlsTextField);
         var mp3Label = document.createElement('p');
-        mp3Label.innerHTML = '.mp3';
+        mp3Label.innerHTML = '.wav';
         textWrapper.appendChild(mp3Label);
         controlsWrapper.appendChild(textWrapper);
         var playButton = document.createElement('div');

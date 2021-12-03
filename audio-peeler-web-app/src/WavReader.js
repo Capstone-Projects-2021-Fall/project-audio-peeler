@@ -24,16 +24,18 @@ async function WavReader(response) {
     }
 
     var audios = [new Audio(), new Audio(), new Audio(), new Audio()];
+    var audioBlobs = [];
+    
     var file = createFile(response.data);
     var jsZip = require('jszip')
     jsZip.loadAsync(file).then(function (zip) {
         Object.keys(zip.files).forEach((filename, index) => {
             zip.files[filename].async('base64').then(function (banana) {
                 audios[index].src = 'data:audio/wav;base64,' + banana;
-            })
+            });
         })
     });
-    return audios;
+    return {'audios': audios, 'blobs': audioBlobs};
 };
 
 export default WavReader;
