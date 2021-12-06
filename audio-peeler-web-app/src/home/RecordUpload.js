@@ -99,12 +99,7 @@ function RecordUpload({ fileUrlToggleProp }) {
     })
       .then(function (response) {
         var wr = WavReader(response);
-        wr.then((result) => {
-          result.forEach((a, index) => {
-            // uncomment line below to play
-            // a.play();
-          })
-        });
+
         setDownloadLink(response.data);
         setDownloadReady(true)
         setParseInProgress(false)
